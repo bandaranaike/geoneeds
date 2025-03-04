@@ -4,11 +4,12 @@ import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/react/24/outline'
 const navigation = [
     {name: 'Dashboard', href: '#', current: true},
     {name: 'Team', href: '#', current: false},
-    {name: 'Projects', href: '#', current: false},
+    {name: 'Projects', href: '/projects', current: false},
     {name: 'Calendar', href: '#', current: false},
+    {name: 'Admin new project', href: '/admin/projects/new', current: false},
 ]
 
-export default function Example() {
+export default function Header() {
     return (
         <Disclosure as="nav" className="dark:bg-gray-800 bg-white">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
