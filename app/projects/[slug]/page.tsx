@@ -1,25 +1,13 @@
-import clientPromise from "@/lib/mongodb";
-import {Project} from "@/types/project";
-import {ObjectId} from "mongodb";
 import Header from "@/components/Header";
 import Cloudinary from "@/components/Cloudinary";
+import {getProject} from "@/lib/projects";
 
 interface ProjectPageProps {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }
 
-async function getProject(slug: string): Promise<Project | null> {
-    console.log(slug)
-    const client = await clientPromise;
-    const db = client.db("geoneeds");
-    const project = await db
-        .collection("projects")
-        .findOne({_id: new ObjectId(slug)});
-
-    return project ? JSON.parse(JSON.stringify(project)) : null;
-}
-
-export default async function ProjectPage({params}: ProjectPageProps) {
+export default async function ProjectPage(props: ProjectPageProps) {
+    const params = await props.params;
     const project = await getProject(params.slug);
 
     if (!project) {
@@ -39,7 +27,6 @@ export default async function ProjectPage({params}: ProjectPageProps) {
                     <img key={index} src={photo} alt={`Project ${index}`} width="300"/>
                 ))}
             </div>
-            <Cloudinary/>
         </div>
     );
 }

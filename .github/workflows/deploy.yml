@@ -1,0 +1,42 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.18.3'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Deploy to server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan 147.93.111.8 >> ~/.ssh/known_hosts
+          rsync -avz --exclude=node_modules --exclude=.git ./ root@147.93.111.8:/var/www/geoneeds
+          ssh root@147.93.111.8 << 'EOF'
+            cd /var/www/geoneeds
+            npm install
+            npm run build
+            pm2 restart ecosystem.config.js --update-env
+            sudo systemctl reload nginx
+          EOF

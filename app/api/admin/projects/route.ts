@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import {NextResponse} from "next/server";
 import clientPromise from "@/lib/mongodb";
 
 export async function POST(req: Request) {
@@ -8,5 +8,14 @@ export async function POST(req: Request) {
 
     await db.collection("projects").insertOne(project);
 
-    return NextResponse.json({ message: "Project created successfully" }, { status: 201 });
+    return NextResponse.json({message: "Project created successfully"}, {status: 201});
+}
+
+export async function GET() {
+    const client = await clientPromise;
+    const db = client.db("geoneeds");
+
+    const projects = await db.collection("projects").find({}).toArray();
+
+    return NextResponse.json(projects);
 }

@@ -1,9 +1,15 @@
 "use client";
 
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import {useParams} from 'next/navigation';
 import Header from "@/components/Header";
+import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 
-export default function NewProjectPage() {
+export default function UpdateProjectPage() {
+
+    const params = useParams();
+    const id = params.id; // Access the dynamic route parameter
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState("");
@@ -13,6 +19,27 @@ export default function NewProjectPage() {
     const [clientName, setClientName] = useState("");
     const [status, setStatus] = useState("ongoing");
     const [uploading, setUploading] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    useEffect(() => {
+        if (id) {
+            fetchProject();
+        }
+    }, [id]);
+
+    const fetchProject = async () => {
+        const res = await fetch(`/api/admin/projects/${id}`);
+        const project = await res.json();
+
+        setTitle(project.title);
+        setDescription(project.description);
+        setDate(project.date);
+        setPhotos(project.photos);
+        setLocation(project.location);
+        setGoogleMapLocation(project.googleMapLocation);
+        setClientName(project.clientName);
+        setStatus(project.status);
+    };
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
@@ -30,7 +57,7 @@ export default function NewProjectPage() {
 
         const data = await res.json();
         setUploading(false);
-        setPhotos([...photos, data.secure_url]); // Store uploaded photo URL
+        setPhotos([...photos, data.secure_url]);
     };
 
     const removePhoto = (index: number) => {
@@ -48,27 +75,39 @@ export default function NewProjectPage() {
             googleMapLocation,
             clientName,
             status,
-            created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
         };
 
-        const res = await fetch("/api/admin/projects", {
-            method: "POST",
+        const res = await fetch(`/api/admin/projects/${id}`, {
+            method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(projectData),
         });
 
         if (res.ok) {
-            alert("Project Created!");
+            alert("Project Updated!");
         } else {
-            alert("Failed to create project.");
+            alert("Failed to update project.");
+        }
+    };
+
+
+    const deleteProject = async () => {
+        const res = await fetch(`/api/admin/projects/${id}`, {
+            method: "DELETE",
+        });
+        if (res.ok) {
+            window.location.href = "/admin/projects";
+        } else {
+            alert("Failed to delete project.");
         }
     };
 
     return (
-        <div><Header/>
+        <div>
+            <Header/>
             <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
-                <h2 className="text-xl font-bold mb-4">Create New Project</h2>
+                <h2 className="text-xl font-bold mb-4">Update Project</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input className="border p-2 w-full" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
                     <textarea className="border p-2 w-full" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required/>
@@ -89,7 +128,7 @@ export default function NewProjectPage() {
 
                     {/* Photo Preview */}
                     <div className="grid grid-cols-3 gap-2 mt-2">
-                        {photos.map((photo, index) => (
+                        {photos && photos.map((photo, index) => (
                             <div key={index} className="relative">
                                 <img src={photo} alt="Uploaded" className="w-full h-24 object-cover rounded-md"/>
                                 <button
@@ -103,9 +142,11 @@ export default function NewProjectPage() {
                         ))}
                     </div>
 
-                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Create Project</button>
+                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Update Project</button>
+                    <button type={"button"} onClick={() => setIsDeleting(true)} className="bg-red-500 text-white px-4 py-2 ml-2 rounded">Delete Project</button>
                 </form>
             </div>
+            <DeleteConfirmationModal isOpen={isDeleting} onConfirm={deleteProject} onCancel={() => setIsDeleting(false)}/>
         </div>
     );
 }
