@@ -1,5 +1,6 @@
 import React from 'react';
-import './WaterWave.css'; // Create WaterWave.css with the provided CSS
+import './WaterWave.css';
+import Link from "next/link"; // Create WaterWave.css with the provided CSS
 
 const WaterWave: React.FC = () => {
     return (
@@ -26,7 +27,12 @@ const WaterWave: React.FC = () => {
                     </g>
                 </svg>
             </div>
-            <div className="relative bg-white p-12 text-gray-500 text-sm">Term and conditions | Privacy policy | Cookie policy | Contact us | About us</div>
+            <div className="relative bg-white p-12 text-gray-500 text-sm">
+                <Link href="/terms-and-conditons">Term and conditions | </Link>
+                <Link href="/privacy-policy">Privacy policy | </Link>
+                <Link href="/cookie-policy">Cookie policy | </Link>
+                <Link href="/contact-us">Contact us | </Link>
+                <Link href="/about-us">About us</Link></div>
         </div>
     );
 };

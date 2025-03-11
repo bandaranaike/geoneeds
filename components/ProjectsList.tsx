@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Header from "@/components/Header";
+import Header from "@/app/components/Header";
 import {getProjects} from "@/lib/projects";
 
 export default async function Projects() {

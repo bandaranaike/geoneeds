@@ -1,7 +1,8 @@
-import Header from "@/components/Header";
+import Header from "@/app/components/Header";
 import {DocumentChartBarIcon} from "@heroicons/react/24/outline";
 import React from "react";
 import WaterWave from "@/components/WaterWave";
+import Encompasses from "@/app/components/Encompasses";
 
 export default function Home() {
 
@@ -13,7 +14,7 @@ export default function Home() {
     ]
 
     return <div>
-        <Header/>
+        <Header currentUrl={`/`}/>
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="my-12">
 
@@ -35,7 +36,7 @@ export default function Home() {
                 </div>
 
             </div>
-            <div className="my-24">
+            <div className="my-8 md:my-24">
                 <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
                     {services.map((service) => (
                         <div key={service.title} className="border dark:border-gray-700 border-gray-200 p-6 rounded-2xl">
@@ -52,7 +53,7 @@ export default function Home() {
 
         <div className="bg-gray-50 py-1 dark:bg-gray-800">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                <div className="my-16 lg:flex items-center justify-between">
+                <div className="md:my-16 my-8 lg:flex items-center justify-between">
                     <div className="mr-12">
                         <h2 className="mb-6 text-5xl font-extrabold karla-font">We envision a world where access to vital resources </h2>
                         <p className="mb-2 text-gray-500 dark:text-gray-400">At GeoNeeds, we envision a world where access to vital resources like clean water is readily available
@@ -72,18 +73,8 @@ export default function Home() {
             </div>
         </div>
         <div className="py-1 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="my-24">
-                <div className="grid grid-cols-2 gap-6 lg:grid-cols-2">
-                    {services.map((service) => (
-                        <div key={service.title} className="border dark:border-gray-700 border-gray-200 p-6 rounded-2xl">
-                            <h3 className="lg:flex justify-between pb-3">
-                                <div className="font-bold karla-font text-lg leading-none mb-3">{service.title}</div>
-                                <img src={service.image} className="w-max lg:w-12"/>
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-200">{service.description}</p>
-                        </div>
-                    ))}
-                </div>
+            <div className="md:my-24 my-8">
+                <Encompasses/>
             </div>
         </div>
         <WaterWave/>

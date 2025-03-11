@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header from "@/app/components/Header";
 import {getProject} from "@/lib/projects";
 
 interface ProjectPageProps {
@@ -15,7 +15,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
 
     return (
         <div>
-            <Header/>
+            <Header currentUrl={`/projects`}/>
             <h1>{project.title}</h1>
             <p>{project.description}</p>
             <p><strong>Client:</strong> {project.clientName}</p>

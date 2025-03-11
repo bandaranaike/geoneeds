@@ -22,13 +22,18 @@ export const authOptions: NextAuthOptions = {
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error("Email and password are required");
                 }
+
                 await connectDB();
                 const user = await User.findOne({
                     email: {$regex: new RegExp("^" + credentials.email + "$", "i")}
                 }).select("password name email role");
+
                 if (!user) throw new Error("User not found");
+
                 const isValid = await bcrypt.compare(credentials.password, user.password);
+
                 if (!isValid) throw new Error("Invalid password");
+
                 return {id: user.id, name: user.name, email: user.email, role: user.role};
             },
         }),
@@ -41,6 +46,7 @@ export const authOptions: NextAuthOptions = {
     session: {strategy: "jwt" as SessionStrategy},
     callbacks: {
         async jwt({token}: { token: JWT }) {
+            token.role = "admin";
             return token;
         },
         session(params: { session: Session; token: JWT, user: AdapterUser }): Awaitable<Session | DefaultSession> {

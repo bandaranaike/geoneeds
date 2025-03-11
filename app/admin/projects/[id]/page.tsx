@@ -2,7 +2,7 @@
 
 import {useState, useEffect} from "react";
 import {useParams} from 'next/navigation';
-import Header from "@/components/Header";
+import Header from "@/app/components/Header";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 
 export default function UpdateProjectPage() {

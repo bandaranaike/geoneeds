@@ -1,7 +1,7 @@
 "use client";
 
 import {useState} from "react";
-import Header from "@/components/Header";
+import Header from "@/app/components/Header";
 
 export default function NewProjectPage() {
     const [title, setTitle] = useState("");
@@ -66,35 +66,36 @@ export default function NewProjectPage() {
     };
 
     return (
-        <div><Header/>
-            <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+        <div>
+            <div className="max-w-2xl mx-auto my-12 p-6 bg-white border border-gray-200 rounded-lg">
                 <h2 className="text-xl font-bold mb-4">Create New Project</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <input className="border p-2 w-full" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
-                    <textarea className="border p-2 w-full" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required/>
-                    <input type="date" className="border p-2 w-full" value={date} onChange={(e) => setDate(e.target.value)} required/>
-                    <input className="border p-2 w-full" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} required/>
-                    <input className="border p-2 w-full" placeholder="Google Map Location" value={googleMapLocation} onChange={(e) => setGoogleMapLocation(e.target.value)}
+                    <input className="border p-2 w-full rounded-lg" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
+                    <textarea className="border p-2 w-full rounded-lg" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required/>
+                    <input type="date" className="border p-2 w-full rounded-lg" value={date} onChange={(e) => setDate(e.target.value)} required/>
+                    <input className="border p-2 w-full rounded-lg" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} required/>
+                    <input className="border p-2 w-full rounded-lg" placeholder="Google Map Location" value={googleMapLocation}
+                           onChange={(e) => setGoogleMapLocation(e.target.value)}
                            required/>
-                    <input className="border p-2 w-full" placeholder="Client Name" value={clientName} onChange={(e) => setClientName(e.target.value)} required/>
-                    <select className="border p-2 w-full" value={status} onChange={(e) => setStatus(e.target.value)}>
+                    <input className="border p-2 w-full rounded-lg" placeholder="Client Name" value={clientName} onChange={(e) => setClientName(e.target.value)} required/>
+                    <select className="border p-2 w-full rounded-lg" value={status} onChange={(e) => setStatus(e.target.value)}>
                         <option value="ongoing">Ongoing</option>
                         <option value="completed">Completed</option>
                     </select>
 
                     {/* File Upload */}
                     <label className="block font-semibold">Upload Photos:</label>
-                    <input type="file" onChange={handleFileUpload} className="border p-2 w-full"/>
-                    {uploading && <p>Uploading...</p>}
+                    <input type="file" onChange={handleFileUpload} className="border p-2 w-full rounded-lg"/>
+                    {uploading && <div><p>Uploading...</p></div>}
 
                     {/* Photo Preview */}
                     <div className="grid grid-cols-3 gap-2 mt-2">
                         {photos.map((photo, index) => (
                             <div key={index} className="relative">
-                                <img src={photo} alt="Uploaded" className="w-full h-24 object-cover rounded-md"/>
+                                <img src={photo} alt="Uploaded" className="w-full h-24 object-cover rounded-lg"/>
                                 <button
                                     type="button"
-                                    className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded"
+                                    className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-lg"
                                     onClick={() => removePhoto(index)}
                                 >
                                     ✕
@@ -103,7 +104,7 @@ export default function NewProjectPage() {
                         ))}
                     </div>
 
-                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Create Project</button>
+                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg">Create Project</button>
                 </form>
             </div>
         </div>
