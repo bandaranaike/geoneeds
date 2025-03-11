@@ -1,12 +1,10 @@
-import { useState } from "react";
-
 interface DeleteConfirmationModalProps {
     onConfirm: () => void;
     onCancel: () => void;
     isOpen: boolean;
 }
 
-export default function DeleteConfirmationModal({ onConfirm, onCancel, isOpen }: DeleteConfirmationModalProps) {
+export default function DeleteConfirmationModal({onConfirm, onCancel, isOpen}: DeleteConfirmationModalProps) {
     if (!isOpen) return null;
 
     return (

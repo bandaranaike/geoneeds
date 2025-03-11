@@ -1,11 +1,11 @@
 // api/admin/projects/[id]/route.ts
-import {NextResponse} from 'next/server';
+import {NextRequest, NextResponse} from 'next/server';
 import {getProject} from "@/lib/projects";
 import clientPromise from "@/lib/mongodb";
 import {ObjectId} from "mongodb";
 
-export async function GET(request: Request, {params}: { params: { id: string } }) {
-    const {id} = params;
+export async function GET(request: NextRequest, {params}: { params: Promise<{ id: string }> }) {
+    const {id} = await params;
     try {
         if (!id) {
             return NextResponse.json({message: "Project ID is required"}, {status: 400});
@@ -21,21 +21,8 @@ export async function GET(request: Request, {params}: { params: { id: string } }
     }
 }
 
-export async function GET1(req: Request) {
-    const {searchParams} = new URL(req.url);
-    const id = searchParams.get("id");
-    if (!id) {
-        return NextResponse.json({message: "Project ID is required"}, {status: 400});
-    }
-    const project = await getProject(id);
-    if (!project) {
-        return NextResponse.json({message: "Project not found"}, {status: 404});
-    }
-    return NextResponse.json(project);
-}
-
-export async function PUT(request: Request, {params}: { params: { id: string } }) {
-    const {id} = params;
+export async function PUT(request: Request, {params}: { params: Promise<{ id: string }> }) {
+    const {id} = await params;
     try {
         const project = await request.json();
         const client = await clientPromise;
@@ -48,8 +35,8 @@ export async function PUT(request: Request, {params}: { params: { id: string } }
     }
 }
 
-export async function DELETE(request: Request, {params}: { params: { id: string } }) {
-    const {id} = params;
+export async function DELETE(request: Request, {params}: { params: Promise<{ id: string }> }) {
+    const {id} = await params;
     try {
         const client = await clientPromise;
         const db = client.db("geoneeds");

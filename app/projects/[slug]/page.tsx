@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import Cloudinary from "@/components/Cloudinary";
 import {getProject} from "@/lib/projects";
 
 interface ProjectPageProps {

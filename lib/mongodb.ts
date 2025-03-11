@@ -7,17 +7,15 @@ if (!uri) {
     throw new Error("Please add MONGODB_URI to .env.local");
 }
 
-let client: MongoClient;
+const client: MongoClient = new MongoClient(uri, options);
 let clientPromise: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === "development") {
-    if (!(global as any)._mongoClientPromise) {
-        client = new MongoClient(uri, options);
-        (global as any)._mongoClientPromise = client.connect();
+    if (!(global as { _mongoClientPromise?: Promise<MongoClient> })._mongoClientPromise) {
+        (global as { _mongoClientPromise?: Promise<MongoClient> })._mongoClientPromise = client.connect();
     }
-    clientPromise = (global as any)._mongoClientPromise;
+    clientPromise = (global as { _mongoClientPromise?: Promise<MongoClient> })._mongoClientPromise || client.connect();
 } else {
-    client = new MongoClient(uri, options);
     clientPromise = client.connect();
 }
 

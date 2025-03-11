@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { v2 as cloudinary } from "cloudinary";
+import {NextRequest, NextResponse} from "next/server";
+import {v2 as cloudinary} from "cloudinary";
 
 cloudinary.config({
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     try {
         // Ensure request is a form-data request
         if (!req.body) {
-            return NextResponse.json({ error: "Invalid request, no file found." }, { status: 400 });
+            return NextResponse.json({error: "Invalid request, no file found."}, {status: 400});
         }
 
         const formData = await req.formData();
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
         // Validate file existence
         if (!file) {
-            return NextResponse.json({ error: "No file uploaded." }, { status: 400 });
+            return NextResponse.json({error: "No file uploaded."}, {status: 400});
         }
 
         // Convert file to Buffer
@@ -36,15 +36,17 @@ export async function POST(req: NextRequest) {
         });
 
         return NextResponse.json(
-            { message: "Upload successful", secure_url: uploadResponse.secure_url },
-            { status: 200 }
+            {message: "Upload successful", secure_url: uploadResponse.secure_url},
+            {status: 200}
         );
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Upload Error:", error);
 
+        const errorMessage = error instanceof Error ? error.message : "Unknown error";
+
         return NextResponse.json(
-            { error: "File upload failed", details: error.message },
-            { status: 500 }
+            {error: "File upload failed", details: errorMessage},
+            {status: 500}
         );
     }
 }
