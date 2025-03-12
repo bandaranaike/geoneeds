@@ -62,8 +62,8 @@ const ContactForm: React.FC<ContactFormProps> = ({onSuccess, onError}) => {
     return (
         <form onSubmit={handleSubmit}>
             {submissionError && <p style={{color: 'red'}} className={`mb-4`}>{submissionError}</p>}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div>
+            <div className="md:grid md:grid-cols-3 gap-4">
+                <div className={`mb-3`}>
                     <label className={`block mb-1`} htmlFor="name">Name:</label>
                     <input
                         className={`border border-gray-200 rounded-lg px-3 py-2 w-full`}
@@ -74,7 +74,7 @@ const ContactForm: React.FC<ContactFormProps> = ({onSuccess, onError}) => {
                         required
                     />
                 </div>
-                <div>
+                <div className={`mb-3`}>
                     <label className={`block mb-1`} htmlFor="phone">Phone:</label>
                     <input
                         className={`border border-gray-200 rounded-lg px-3 py-2 w-full`}
@@ -84,7 +84,7 @@ const ContactForm: React.FC<ContactFormProps> = ({onSuccess, onError}) => {
                         onChange={(e) => setPhone(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={`mb-3`}>
                     <label className={`block mb-1`} htmlFor="email">Email:</label>
                     <input
                         className={`border border-gray-200 rounded-lg px-3 py-2 w-full`}
@@ -95,7 +95,7 @@ const ContactForm: React.FC<ContactFormProps> = ({onSuccess, onError}) => {
                         required
                     />
                 </div>
-                <div className={`col-span-3`}>
+                <div className={`col-span-3 mb-3`}>
                     <label className={`block mb-1`} htmlFor="message">Message:</label>
                     <textarea
                         className={`border border-gray-200 rounded-lg px-3 py-2 w-full`}
