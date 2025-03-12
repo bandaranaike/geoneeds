@@ -26,13 +26,13 @@ export default function Home() {
                             experts leverages cutting-edge technology and in-depth knowledge to unearth valuable insights about the earth beneath our feet. From identifying optimal
                             drilling locations to assessing environmental impact.</p>
                         <div className="my-8">
-                            <button className="rounded-full border dark:border-gray-600 border-gray-200 shadow-sm px-4 py-2 flex">
+                            <a href={'/projects'} className="rounded-full border max-w-xs text-center dark:border-gray-600 border-gray-200 shadow-sm px-4 py-2 flex">
                                 <DocumentChartBarIcon width={16} height={16} className="text-blue-500 mt-1 mr-2"/>
                                 See more about this project
-                            </button>
+                            </a>
                         </div>
                     </div>
-                    <img src="/slider-1.jpg" className="max-w-md mt-8" alt="Slider Image"/>
+                    <img src="/2.jpeg" className="max-w-md w-full mt-8 rounded-full shadow" alt="Slider Image"/>
                 </div>
 
             </div>
@@ -51,24 +51,27 @@ export default function Home() {
             </div>
         </div>
 
-        <div className="bg-gray-50 py-1 dark:bg-gray-800">
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                <div className="md:my-16 my-8 lg:flex items-center justify-between">
-                    <div className="mr-12">
-                        <h2 className="mb-6 text-5xl font-extrabold karla-font">We envision a world where access to vital resources </h2>
-                        <p className="mb-2 text-gray-500 dark:text-gray-400">At GeoNeeds, we envision a world where access to vital resources like clean water is readily available
-                            and managed
-                            responsibly. We strive to
-                            be
-                            the trusted partner for all geo-location needs, recognized for our expertise, innovation, and commitment to sustainability.</p>
+        <div className="bg-[url(/2.jpeg)] bg-cover bg-center">
+            <div className="bg-gray-800/60 backdrop-blur-2xl lg:py-12 ">
+                <div className="mx-auto max-w-7xl lg:px-8 p-4">
+                    <div className="md:my-16 my-8 lg:flex items-center justify-between">
+                        <div className="mr-12">
+                            <h2 className="mb-6 text-5xl text-white font-extrabold karla-font">We envision a world where access to vital resources </h2>
+                            <p className="mb-2 text-gray-100 dark:text-gray-400">At GeoNeeds, we envision a world where access to vital resources like clean water is readily
+                                available
+                                and managed
+                                responsibly. We strive to
+                                be
+                                the trusted partner for all geo-location needs, recognized for our expertise, innovation, and commitment to sustainability.</p>
 
-                        <p className=" text-gray-500 dark:text-gray-400"> Our Mission: Our mission is to provide accurate and reliable geo-location services that empower our
-                            clients to achieve their
-                            project goals while minimizing
-                            environmental impact. We are dedicated to continuous improvement, investing in the latest technologies and fostering a culture of excellence to deliver
-                            exceptional value and contribute to a sustainable future.</p>
+                            <p className=" text-gray-100 dark:text-gray-400"> Our Mission: Our mission is to provide accurate and reliable geo-location services that empower our
+                                clients to achieve their
+                                project goals while minimizing
+                                environmental impact. We are dedicated to continuous improvement, investing in the latest technologies and fostering a culture of excellence to
+                                deliver
+                                exceptional value and contribute to a sustainable future.</p>
+                        </div>
                     </div>
-                    <img src="/about-us.png" className="w-80 mx-auto mt-6 lg:mx-0 lg:mt-0" alt="Slider Image"/>
                 </div>
             </div>
         </div>

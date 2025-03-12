@@ -47,9 +47,13 @@ const ContactForm: React.FC<ContactFormProps> = ({onSuccess, onError}) => {
             setPhone('');
             setEmail('');
             setMessage('');
-        } catch (error: any) {
-            setSubmissionError(error.message || 'An error occurred.');
-            if (onError) onError(error.message || 'An error occurred.');
+        } catch (error: unknown) {
+            // Handle the error safely
+            const errorMessage = error instanceof Error ? error.message : 'An error occurred.';
+            setSubmissionError(errorMessage);
+
+            // Call onError callback if it exists
+            onError?.(errorMessage);
         } finally {
             setIsSubmitting(false);
         }

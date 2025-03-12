@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Header from "@/app/components/Header";
 import {getProjects} from "@/lib/projects";
 import {PlusCircleIcon} from "@heroicons/react/24/outline";
 

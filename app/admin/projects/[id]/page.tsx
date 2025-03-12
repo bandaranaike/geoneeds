@@ -2,7 +2,6 @@
 
 import {useState, useEffect} from "react";
 import {useParams} from 'next/navigation';
-import Header from "@/app/components/Header";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 
 export default function UpdateProjectPage() {
@@ -105,8 +104,7 @@ export default function UpdateProjectPage() {
 
     return (
         <div>
-            <Header/>
-            <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+            <div className="max-w-2xl mx-auto my-12 p-6 bg-white border border-gray-200 rounded-lg">
                 <h2 className="text-xl font-bold mb-4">Update Project</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input className="border p-2 w-full" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
