@@ -1,7 +1,6 @@
 import {connectDB} from "@/lib/mongodbConnect";
 import {User} from "@/models/User";
-// @ts-expect-error: bcrypt is not typed
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 async function createUser() {
     await connectDB();

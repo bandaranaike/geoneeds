@@ -16,6 +16,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 - **Database:** MongoDB database named `geoneeds`.
 - **Data access:** Native MongoDB driver for projects and messages; Mongoose for users.
 - **Authentication:** NextAuth 4 with credentials, Google provider, MongoDB adapter, and JWT sessions.
+- **Password hashing:** `bcryptjs` is used instead of native `bcrypt` to avoid CI/deploy failures from missing compiled bindings.
 - **Media:** Cloudinary and `next-cloudinary`.
 - **UI libraries:** Headless UI and Heroicons.
 

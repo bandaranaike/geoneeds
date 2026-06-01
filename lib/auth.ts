@@ -5,8 +5,7 @@ import {MongoDBAdapter} from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodb"; // MongoDB connection
 import {connectDB} from "@/lib/mongodbConnect";
 import {User} from "@/models/User";
-// @ts-expect-error: bcrypt is not typed
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import {JWT} from "next-auth/jwt";
 import {AdapterUser} from "next-auth/adapters";
 
