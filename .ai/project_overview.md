@@ -68,12 +68,12 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 ## Styling Notes
 
 - Tailwind scans `pages`, `components`, and `app`.
-- `tailwind.config.ts` currently exposes only `background` and `foreground` CSS variable colors.
-- `app/globals.css` defines the site theme tokens for light and dark modes, including background, foreground, surface, primary, accent, earth, and border colors.
-- `tailwind.config.ts` exposes theme token aliases such as `primary`, `surface`, `line`, `accent`, and `rounded-geo`.
-- `app/components/ThemeToggle.tsx` controls the `.dark` class on the document root and persists the choice in local storage.
-- Existing design work should reuse Header, Footer, Encompasses, WaterWave, and existing project/admin components unless there is a clear reason to replace them.
-- The completed theme pass uses a blue-led hydrogeology palette with teal and earth accents, medium radius, larger spacing, and dark-mode support.
+- `tailwind.config.ts` currently exposes background and foreground colors along with theme token aliases like `primary`, `surface`, `line`, `accent`, and `rounded-geo` (which maps to `0.875rem` radius).
+- `app/globals.css` defines color variables for background, foreground, surface, primary, accent, earth, and border.
+- Homepage layout features a full-bleed hero banner utilizing a high-contrast dark overlay over a forest background image.
+- Visual assets stored under `/public` now include: `/hero_forest.png`, `/groundwater_surveys.png`, `/soil_engineering.png`, `/water_quality.png`, `/borehole_logging.png`, `/resistivity_imaging.png`, `/pump_testing.png`, `/environmental_audit.png`, and `/cta_lake.png`, alongside individual regional survey thumbnails.
+- The `Header` component supports a `transparent` prop allowing navigation menus to float cleanly on top of image-heavy hero sections.
+- The `Footer` component has been refactored from a simple wave placeholder to a feature-rich, dark-theme layout displaying office bases, useful links, dynamic social actions, and legal policies.
 
 ---
 
@@ -92,3 +92,4 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 
 - Tasks are tracked by status under `.ai/tasks/`; read `.ai/tasks/inbox.md`, `.ai/tasks/README.md`, and `.ai/tasks/index.md` before changing task files.
 - Task `completed/001_install_new_theme.md` completed the sitewide visual refresh on 2026-06-01.
+- Task `completed/002_change_theme_structure.md` completed the visual homepage restructure, premium footer creation, and image updates on 2026-06-01.
