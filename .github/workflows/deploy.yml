@@ -1,42 +1,46 @@
-name: Deploy to Production
+name: Deploy Geoneeds App
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          node-version: '20.18.3'
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
 
-      - name: Install dependencies
-        run: npm install
+            export PNPM_HOME="$HOME/.local/share/pnpm"
+            export PATH="$PNPM_HOME:$PATH"
 
-      - name: Build the project
-        run: npm run build
+            cd /var/www/geoneeds.info
 
-      - name: Deploy to server
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan 147.93.111.8 >> ~/.ssh/known_hosts
-          rsync -avz --exclude=node_modules --exclude=.git ./ root@147.93.111.8:/var/www/geoneeds
-          ssh root@147.93.111.8 << 'EOF'
-            cd /var/www/geoneeds
-            npm install
-            npm run build
-            pm2 restart ecosystem.config.js --update-env
+            echo "Pulling latest code"
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "Installing dependencies"
+            pnpm install --frozen-lockfile
+
+            echo "Building app"
+            pnpm build
+
+            echo "Restarting PM2"
+            pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
+            pm2 save
+
+            echo "Reloading Nginx"
             sudo systemctl reload nginx
-          EOF
+
+            echo "Deployment completed"
