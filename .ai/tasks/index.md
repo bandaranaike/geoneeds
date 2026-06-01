@@ -4,9 +4,7 @@ Last updated: 2026-06-01
 
 ## Pending
 
-| ID | Task | File |
-| --- | --- | --- |
-| 001 | Install New Theme | `pending/001_install_new_theme.md` |
+No tasks.
 
 ## In Progress
 
@@ -18,7 +16,9 @@ No tasks.
 
 ## Completed
 
-No tasks.
+| ID | Task | File |
+| --- | --- | --- |
+| 001 | Install New Theme | `completed/001_install_new_theme.md` |
 
 ## Archived
 

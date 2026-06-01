@@ -12,6 +12,16 @@ export default {
             colors: {
                 background: "var(--background)",
                 foreground: "var(--foreground)",
+                surface: "var(--surface)",
+                "surface-muted": "var(--surface-muted)",
+                primary: "var(--primary)",
+                "primary-strong": "var(--primary-strong)",
+                accent: "var(--accent)",
+                earth: "var(--earth)",
+                line: "var(--border)",
+            },
+            borderRadius: {
+                geo: "0.875rem",
             },
         },
     },

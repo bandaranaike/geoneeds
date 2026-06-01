@@ -34,20 +34,24 @@ const Encompasses: React.FC = () => {
 
     ];
 
-    return (<div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:col-span-3 gap-6">
+    return (<section>
+        <div className="mb-10 max-w-3xl">
+            <h2 className="mb-4 text-3xl font-extrabold text-foreground karla-font md:text-4xl">What GeoNeeds encompasses</h2>
+            <p className="text-lg leading-8 text-foreground/65">Practical hydrogeology, construction support, and water-resource guidance for dependable site decisions.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {items.map(item => (
-                <div className="border border-gray-200 rounded-xl flex content-center md:items-center items-start shadow-sm" key={item.title}>
-                    <img src={item.image} alt={item.title} className={`md:rounded-l-xl md:w-40 w-20 rounded-tl-xl`}/>
-                    <div className="p-4">
-                        <h2 className="text-xl font-semibold mb-4">{item.title}</h2>
-                        <p className="text-gray-500">{item.description}</p>
+                <div className="flex items-start overflow-hidden rounded-geo border border-line bg-surface shadow-sm transition hover:-translate-y-1 hover:border-primary hover:shadow-xl hover:shadow-sky-950/10 md:items-center" key={item.title}>
+                    <img src={item.image} alt={item.title} className="h-28 w-28 shrink-0 object-cover md:h-40 md:w-44"/>
+                    <div className="p-5">
+                        <h3 className="mb-3 text-xl font-bold leading-tight text-foreground karla-font">{item.title}</h3>
+                        <p className="leading-7 text-foreground/65">{item.description}</p>
                     </div>
 
                 </div>
             ))}
         </div>
-    </div>)
+    </section>)
 }
 
 export default Encompasses;

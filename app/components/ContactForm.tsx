@@ -61,12 +61,12 @@ const ContactForm: React.FC<ContactFormProps> = ({onSuccess, onError}) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            {submissionError && <p style={{color: 'red'}} className={`mb-4`}>{submissionError}</p>}
-            <div className="md:grid md:grid-cols-3 gap-4">
-                <div className={`mb-3`}>
-                    <label className={`block mb-1`} htmlFor="name">Name:</label>
+            {submissionError && <p className="mb-4 rounded-geo border border-red-200 bg-red-50 px-4 py-3 text-red-700">{submissionError}</p>}
+            <div className="grid gap-5 md:grid-cols-3">
+                <div>
+                    <label className="mb-2 block text-sm font-semibold text-foreground" htmlFor="name">Name</label>
                     <input
-                        className={`border border-gray-200 rounded-lg px-3 py-2 w-full`}
+                        className="w-full rounded-geo border border-line bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-sky-200 dark:focus:ring-sky-900"
                         type="text"
                         id="name"
                         value={name}
@@ -74,20 +74,20 @@ const ContactForm: React.FC<ContactFormProps> = ({onSuccess, onError}) => {
                         required
                     />
                 </div>
-                <div className={`mb-3`}>
-                    <label className={`block mb-1`} htmlFor="phone">Phone:</label>
+                <div>
+                    <label className="mb-2 block text-sm font-semibold text-foreground" htmlFor="phone">Phone</label>
                     <input
-                        className={`border border-gray-200 rounded-lg px-3 py-2 w-full`}
+                        className="w-full rounded-geo border border-line bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-sky-200 dark:focus:ring-sky-900"
                         type="tel"
                         id="phone"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                     />
                 </div>
-                <div className={`mb-3`}>
-                    <label className={`block mb-1`} htmlFor="email">Email:</label>
+                <div>
+                    <label className="mb-2 block text-sm font-semibold text-foreground" htmlFor="email">Email</label>
                     <input
-                        className={`border border-gray-200 rounded-lg px-3 py-2 w-full`}
+                        className="w-full rounded-geo border border-line bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-sky-200 dark:focus:ring-sky-900"
                         type="email"
                         id="email"
                         value={email}
@@ -95,18 +95,18 @@ const ContactForm: React.FC<ContactFormProps> = ({onSuccess, onError}) => {
                         required
                     />
                 </div>
-                <div className={`col-span-3 mb-3`}>
-                    <label className={`block mb-1`} htmlFor="message">Message:</label>
+                <div className="md:col-span-3">
+                    <label className="mb-2 block text-sm font-semibold text-foreground" htmlFor="message">Message</label>
                     <textarea
-                        className={`border border-gray-200 rounded-lg px-3 py-2 w-full`}
+                        className="min-h-36 w-full rounded-geo border border-line bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-sky-200 dark:focus:ring-sky-900"
                         id="message"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         required
                     />
                 </div>
-                <div className="">
-                    <button type="submit" className={`border border-gray-300 bg-gray rounded-lg  -sm hover:bg-gray-100 font-semibold px-6 py-3`} disabled={isSubmitting}>
+                <div className="md:col-span-3">
+                    <button type="submit" className="rounded-geo bg-primary px-6 py-3 font-semibold text-white shadow-lg shadow-sky-900/10 transition hover:-translate-y-0.5 hover:bg-primary-strong disabled:cursor-not-allowed disabled:opacity-60" disabled={isSubmitting}>
                         {isSubmitting ? 'Submitting...' : 'Send Message'}
                     </button>
                 </div>

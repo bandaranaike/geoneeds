@@ -5,23 +5,41 @@
 @tailwind utilities;
 
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
+    --background: #f7fbfd;
+    --foreground: #122029;
+    --surface: #ffffff;
+    --surface-muted: #edf6f8;
+    --primary: #075985;
+    --primary-strong: #0c4a6e;
+    --accent: #0f766e;
+    --earth: #6b6a3f;
+    --border: #cfe1e7;
 }
 
-/*@media (prefers-color-scheme: dark) {*/
-/*    :root {*/
-/*        --background: #0a0a0a;*/
-/*        --foreground: #ededed;*/
-/*    }*/
-/*}*/
+.dark {
+    --background: #07141b;
+    --foreground: #e8f5f7;
+    --surface: #0d202a;
+    --surface-muted: #102c38;
+    --primary: #38bdf8;
+    --primary-strong: #7dd3fc;
+    --accent: #5eead4;
+    --earth: #c9c278;
+    --border: #234657;
+}
 
 body {
     color: var(--foreground);
-    background: var(--background);
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 34rem),
+        linear-gradient(180deg, var(--background), var(--surface-muted));
     font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
 .karla-font {
     font-family: Karla, Arial, Helvetica, sans-serif;
+}
+
+::selection {
+    background: rgba(14, 165, 233, 0.28);
 }

@@ -69,9 +69,11 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 
 - Tailwind scans `pages`, `components`, and `app`.
 - `tailwind.config.ts` currently exposes only `background` and `foreground` CSS variable colors.
-- `app/globals.css` defines `--background` and `--foreground`; the dark-mode block is commented out.
+- `app/globals.css` defines the site theme tokens for light and dark modes, including background, foreground, surface, primary, accent, earth, and border colors.
+- `tailwind.config.ts` exposes theme token aliases such as `primary`, `surface`, `line`, `accent`, and `rounded-geo`.
+- `app/components/ThemeToggle.tsx` controls the `.dark` class on the document root and persists the choice in local storage.
 - Existing design work should reuse Header, Footer, Encompasses, WaterWave, and existing project/admin components unless there is a clear reason to replace them.
-- The pending theme task should keep the site premium and hydrogeology-focused without overloading the palette with one hue.
+- The completed theme pass uses a blue-led hydrogeology palette with teal and earth accents, medium radius, larger spacing, and dark-mode support.
 
 ---
 
@@ -89,5 +91,4 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 ## Active Task Notes
 
 - Tasks are tracked by status under `.ai/tasks/`; read `.ai/tasks/inbox.md`, `.ai/tasks/README.md`, and `.ai/tasks/index.md` before changing task files.
-- Task `pending/001_install_new_theme.md` is currently pending and covers a sitewide visual refresh.
-- Before starting Task 001, inspect only the pages/components that will be restyled first: `app/page.tsx`, `app/globals.css`, `tailwind.config.ts`, `app/components/Header.tsx`, `app/components/Footer.tsx`, `app/components/Encompasses.tsx`, and `components/WaterWave.tsx`.
+- Task `completed/001_install_new_theme.md` completed the sitewide visual refresh on 2026-06-01.

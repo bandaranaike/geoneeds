@@ -6,8 +6,8 @@ import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 
 export default function UpdateProjectPage() {
 
-    const params = useParams();
-    const id = params.id; // Access the dynamic route parameter
+    const params = useParams<{ id: string }>();
+    const id = params?.id; // Access the dynamic route parameter
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");

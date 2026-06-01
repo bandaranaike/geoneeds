@@ -13,38 +13,45 @@ export default function Home() {
         {title: "Geo-Technical Surveys", image: "image-4.png", description: "Conduct site investigations for construction and engineering projects."},
     ]
 
-    return <div>
+    return <div className="min-h-screen">
         <Header currentUrl={`/`}/>
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="my-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="py-14 lg:py-20">
 
-                <div className="lg:flex content-center items-center">
-                    <div className="px-8 lg:mb-6">
-                        <h2 className="text-5xl leading-none font-extrabold mb-6 karla-font">Unlock the Earth&#39;s Hidden Potential</h2>
-                        <p className="text-gray-500 dark:text-gray-200">GeoNeeds specializes in precise geo-location investigations for tube well water and various geo-related
+                <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+                    <div className="lg:mb-6">
+                        <div className="mb-5 inline-flex rounded-geo border border-line bg-surface px-4 py-2 text-sm font-semibold text-primary shadow-sm">Industrial water intelligence</div>
+                        <h1 className="mb-7 max-w-3xl text-5xl font-extrabold leading-tight tracking-normal text-foreground karla-font md:text-6xl">Unlock the Earth&#39;s Hidden Potential</h1>
+                        <p className="max-w-2xl text-lg leading-8 text-foreground/70">GeoNeeds specializes in precise geo-location investigations for tube well water and various geo-related
                             projects. Our team of
                             experts leverages cutting-edge technology and in-depth knowledge to unearth valuable insights about the earth beneath our feet. From identifying optimal
                             drilling locations to assessing environmental impact.</p>
                         <div className="my-8">
-                            <a href={'/projects'} className="rounded-full border max-w-xs text-center dark:border-gray-600 border-gray-200 shadow-sm px-4 py-2 flex">
-                                <DocumentChartBarIcon width={16} height={16} className="text-blue-500 mt-1 mr-2"/>
+                            <a href={'/projects'} className="inline-flex max-w-xs items-center rounded-geo bg-primary px-5 py-3 text-center font-semibold text-white shadow-lg shadow-sky-900/10 transition hover:-translate-y-0.5 hover:bg-primary-strong">
+                                <DocumentChartBarIcon width={18} height={18} className="mr-2"/>
                                 See more about this project
                             </a>
                         </div>
                     </div>
-                    <img src="/2.jpeg" className="max-w-md w-full mt-8 rounded-full shadow" alt="Slider Image"/>
+                    <div className="relative">
+                        <div className="absolute -inset-4 rounded-[1.75rem] bg-gradient-to-br from-sky-300/30 via-teal-200/20 to-lime-200/20 blur-2xl"/>
+                        <img src="/2.jpeg" className="relative w-full rounded-[1.5rem] border border-line object-cover shadow-2xl shadow-sky-950/15" alt="Hydrogeology field survey"/>
+                    </div>
                 </div>
 
             </div>
-            <div className="my-8 md:my-24">
-                <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+            <div className="py-10 md:py-20">
+                <div className="mb-10 max-w-3xl">
+                    <h2 className="text-3xl font-extrabold text-foreground karla-font md:text-4xl">Field-ready services for water and ground decisions</h2>
+                </div>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     {services.map((service) => (
-                        <div key={service.title} className="border dark:border-gray-700 border-gray-200 p-6 rounded-2xl">
-                            <h3 className="lg:flex justify-between pb-3">
-                                <div className="font-bold karla-font text-lg leading-none mb-3">{service.title}</div>
-                                <img src={service.image} className="w-max lg:w-12"/>
+                        <div key={service.title} className="rounded-geo border border-line bg-surface p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary hover:shadow-xl hover:shadow-sky-950/10">
+                            <h3 className="flex items-start justify-between gap-4 pb-5">
+                                <span className="font-bold karla-font text-xl leading-tight">{service.title}</span>
+                                <img src={service.image} className="h-12 w-12 object-contain" alt=""/>
                             </h3>
-                            <p className="text-gray-600 dark:text-gray-200">{service.description}</p>
+                            <p className="leading-7 text-foreground/65">{service.description}</p>
                         </div>
                     ))}
                 </div>
@@ -52,19 +59,19 @@ export default function Home() {
         </div>
 
         <div className="bg-[url(/2.jpeg)] bg-cover bg-center">
-            <div className="bg-gray-800/60 backdrop-blur-2xl lg:py-12 ">
-                <div className="mx-auto max-w-7xl lg:px-8 p-4">
-                    <div className="md:my-16 my-8 lg:flex items-center justify-between">
-                        <div className="mr-12">
-                            <h2 className="mb-6 text-5xl text-white font-extrabold karla-font">We envision a world where access to vital resources </h2>
-                            <p className="mb-2 text-gray-100 dark:text-gray-400">At GeoNeeds, we envision a world where access to vital resources like clean water is readily
+            <div className="bg-sky-950/75 backdrop-blur-xl lg:py-14 ">
+                <div className="mx-auto max-w-7xl p-4 lg:px-8">
+                    <div className="my-10 max-w-4xl md:my-18">
+                        <div>
+                            <h2 className="mb-6 text-4xl font-extrabold leading-tight text-white karla-font md:text-5xl">We envision a world where access to vital resources is responsible and reliable</h2>
+                            <p className="mb-4 text-lg leading-8 text-sky-50/85">At GeoNeeds, we envision a world where access to vital resources like clean water is readily
                                 available
                                 and managed
                                 responsibly. We strive to
                                 be
                                 the trusted partner for all geo-location needs, recognized for our expertise, innovation, and commitment to sustainability.</p>
 
-                            <p className=" text-gray-100 dark:text-gray-400"> Our Mission: Our mission is to provide accurate and reliable geo-location services that empower our
+                            <p className="text-lg leading-8 text-sky-50/85"> Our Mission: Our mission is to provide accurate and reliable geo-location services that empower our
                                 clients to achieve their
                                 project goals while minimizing
                                 environmental impact. We are dedicated to continuous improvement, investing in the latest technologies and fostering a culture of excellence to
@@ -75,8 +82,8 @@ export default function Home() {
                 </div>
             </div>
         </div>
-        <div className="py-1 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="md:my-24 my-8">
+        <div className="mx-auto max-w-7xl px-4 py-1 sm:px-6 lg:px-8">
+            <div className="my-12 md:my-24">
                 <Encompasses/>
             </div>
         </div>

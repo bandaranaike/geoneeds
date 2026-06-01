@@ -1,6 +1,7 @@
 import {Disclosure, DisclosureButton, DisclosurePanel} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import Link from "next/link";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 const navigation = [
     {name: 'Home', href: '/'},
@@ -11,13 +12,13 @@ const navigation = [
 
 export default function Header({currentUrl}: { currentUrl?: string }) {
     return (
-        <Disclosure as="nav" className="dark:bg-gray-800 bg-white">
+        <Disclosure as="nav" className="sticky top-0 z-40 border-b border-line bg-surface/90 backdrop-blur-xl">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                <div className="relative flex h-16 items-center justify-between">
+                <div className="relative flex h-20 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         {/* Mobile menu button*/}
                         <DisclosureButton
-                            className="group relative inline-flex items-center justify-center rounded-md p-2 dark:text-gray-400 hover:bg-gray-700 dark:hover:text-white focus:ring-2 dark:focus:ring-white focus:outline-hidden focus:ring-inset text-gray-700">
+                            className="group relative inline-flex items-center justify-center rounded-geo border border-line bg-surface-muted p-2 text-primary transition hover:border-primary focus:ring-2 focus:ring-primary focus:outline-hidden focus:ring-inset">
                             <span className="absolute -inset-0.5"/>
                             <span className="sr-only">Open main menu</span>
                             <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden"/>
@@ -29,18 +30,18 @@ export default function Header({currentUrl}: { currentUrl?: string }) {
                             <Link href={'/'}><img
                                 alt="Geo Needs"
                                 src="/logo.png"
-                                className="h-10 w-auto"
+                                className="h-12 w-auto"
                             /></Link>
                         </div>
-                        <div className="hidden sm:ml-6 sm:block">
-                            <div className="flex space-x-4">
+                        <div className="hidden sm:ml-10 sm:block">
+                            <div className="flex items-center gap-2">
                                 {navigation.map((item) => (
                                     <a
                                         key={item.name}
                                         href={item.href}
                                         aria-current={item.href == currentUrl ? 'page' : undefined}
-                                        className={item.href == currentUrl ? 'dark:text-white px-3 py-2 text-sm font-medium text-blue-400' :
-                                            'dark:hover:text-white px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-200 hover:text-blue-500'
+                                        className={item.href == currentUrl ? 'rounded-geo bg-primary text-white px-4 py-2 text-sm font-semibold shadow-sm' :
+                                            'rounded-geo px-4 py-2 text-sm font-semibold text-foreground/70 transition hover:bg-surface-muted hover:text-primary'
                                         }
                                     >
                                         {item.name}
@@ -50,19 +51,20 @@ export default function Header({currentUrl}: { currentUrl?: string }) {
                         </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        <ThemeToggle/>
                     </div>
                 </div>
             </div>
 
-            <DisclosurePanel className="sm:hidden">
-                <div className="space-y-1 px-2 pt-2 pb-3">
+            <DisclosurePanel className="border-t border-line bg-surface sm:hidden">
+                <div className="space-y-2 px-4 pt-3 pb-4">
                     {navigation.map((item) => (
                         <DisclosureButton
                             key={item.name}
                             as="a"
                             href={item.href}
                             aria-current={item.href == currentUrl ? 'page' : undefined}
-                            className={`${item.href == currentUrl ? 'block px-3 py-2 text-blue-600' : 'text-gray-600 hover:text-gray-500 block px-3 py-2'}`}
+                            className={`${item.href == currentUrl ? 'block rounded-geo bg-primary px-4 py-3 font-semibold text-white' : 'block rounded-geo px-4 py-3 font-semibold text-foreground/75 hover:bg-surface-muted hover:text-primary'}`}
                         >
                             {item.name}
                         </DisclosureButton>

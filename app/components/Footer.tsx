@@ -3,7 +3,7 @@ import {FC} from "react";
 
 const Footer: FC = () => {
     return (
-        <footer className={`relative mb-0`}>
+        <footer className="relative mb-0 border-t border-line bg-surface">
             <WaterWave/>
         </footer>
     );
