@@ -57,7 +57,7 @@ const AboutUsPage = () => {
                         </div>
                         <div className="grid content-end gap-4">
                             {strengths.map((item) => (
-                                <div key={item.title} className="border border-white/15 bg-white/10 p-5 backdrop-blur">
+                                <div key={item.title} className="border border-white/15 bg-white/10 p-5 backdrop-blur rounded-geo">
                                     <h2 className="karla-font text-xl font-extrabold text-white">{item.title}</h2>
                                     <p className="mt-2 text-sm leading-7 text-slate-300">{item.description}</p>
                                 </div>

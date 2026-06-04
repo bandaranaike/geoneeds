@@ -6,32 +6,41 @@ export default async function Projects() {
     const projects = await getProjects();
 
     return (
-        <div>
-            <div className={`p-6 max-w-7xl mx-auto`}>
-                <div className="border border-gray-200 rounded-xl">
-                    <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                        <h1 className={`text-2xl`}>Admin Projects</h1>
-                        <Link href={`/admin/projects/new`} className={`bg-blue-500 text-white pl-2 pr-4 py-2 rounded-lg flex gap-2`}><PlusCircleIcon width={22}/>Add</Link>
-                    </div>
-                    <table className="w-full divide-y divide-gray-200">
-                        <thead>
-                        <tr className="border-b-2 border-gray-200 text-left">
-                            <th className="px-2 py-1 border-r">Title</th>
-                            <th className="px-3 py-2">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {projects.map((project) => (
-                            <tr key={project._id} className={`border-b border-gray-200 last:border-b-0`}>
-                                <td className={`px-2 py-1 border-r`}>{project.title}</td>
-                                <td className={`px-2 py-1`}>
-                                    <Link href={`/admin/projects/${project._id}`}>Edit</Link>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+        <div className="overflow-hidden rounded-geo border border-line bg-surface shadow-sm">
+            <div className="flex flex-col gap-4 border-b border-line px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <span className="text-xs font-bold uppercase tracking-widest text-primary">Project records</span>
+                    <h1 className="karla-font mt-1 text-2xl font-extrabold text-foreground">Admin Projects</h1>
                 </div>
+                <Link href="/admin/projects/new" className="inline-flex items-center justify-center gap-2 rounded-geo bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-strong">
+                    <PlusCircleIcon width={22}/>Add project
+                </Link>
+            </div>
+            <div className="overflow-x-auto">
+                <table className="w-full min-w-[640px] divide-y divide-line text-left text-sm">
+                    <thead className="bg-surface-muted/60 text-xs uppercase tracking-widest text-foreground/55">
+                    <tr>
+                        <th className="px-4 py-3 font-extrabold">Title</th>
+                        <th className="px-4 py-3 font-extrabold">Location</th>
+                        <th className="px-4 py-3 font-extrabold">Status</th>
+                        <th className="px-4 py-3 font-extrabold">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody className="divide-y divide-line">
+                    {projects.map((project) => (
+                        <tr key={project._id} className="hover:bg-surface-muted/40">
+                            <td className="px-4 py-3 font-semibold text-foreground">{project.title}</td>
+                            <td className="px-4 py-3 text-foreground/70">{project.location}</td>
+                            <td className="px-4 py-3">
+                                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">{project.status || "Draft"}</span>
+                            </td>
+                            <td className="px-4 py-3">
+                                <Link href={`/admin/projects/${project._id}`} className="font-bold text-primary hover:text-primary-strong">Edit</Link>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

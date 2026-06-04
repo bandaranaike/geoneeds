@@ -5,7 +5,14 @@ import {ObjectId} from "mongodb";
 export async function getProjects(): Promise<Project[]> {
     const client = await clientPromise;
     const db = client.db("geoneeds");
-    const projects = await db.collection("projects").find({}).toArray();
+    const projects = await db.collection("projects").find({}).sort({created_at: -1, _id: -1}).toArray();
+    return JSON.parse(JSON.stringify(projects));
+}
+
+export async function getLatestProjects(limit = 4): Promise<Project[]> {
+    const client = await clientPromise;
+    const db = client.db("geoneeds");
+    const projects = await db.collection("projects").find({}).sort({created_at: -1, _id: -1}).limit(limit).toArray();
     return JSON.parse(JSON.stringify(projects));
 }
 

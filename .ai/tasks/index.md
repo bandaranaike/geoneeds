@@ -18,6 +18,9 @@ No tasks.
 
 | ID | Task | File |
 | --- | --- | --- |
+| 007 | Theme Auth and Admin Pages | `completed/007_theme_auth_and_admin_pages.md` |
+| 006 | Show Three Home Projects | `completed/006_show_three_home_projects.md` |
+| 005 | Make Home Survey Projects Dynamic | `completed/005_dynamic_home_survey_projects.md` |
 | 004 | Modernize About and Policy Pages | `completed/004_modernize_about_and_policy_pages.md` |
 | 003 | Modernize Public Project Pages | `completed/003_modernize_public_project_pages.md` |
 | 002 | Redesign Home Page and Theme Structure | `completed/002_change_theme_structure.md` |

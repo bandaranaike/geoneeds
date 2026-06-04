@@ -1,6 +1,6 @@
 "use client";
 
-import {useState, useEffect} from "react";
+import {useState, useEffect, useCallback} from "react";
 import {useParams} from 'next/navigation';
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 
@@ -20,13 +20,7 @@ export default function UpdateProjectPage() {
     const [uploading, setUploading] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    useEffect(() => {
-        if (id) {
-            fetchProject();
-        }
-    }, [id]);
-
-    const fetchProject = async () => {
+    const fetchProject = useCallback(async () => {
         const res = await fetch(`/api/admin/projects/${id}`);
         const project = await res.json();
 
@@ -38,7 +32,13 @@ export default function UpdateProjectPage() {
         setGoogleMapLocation(project.googleMapLocation);
         setClientName(project.clientName);
         setStatus(project.status);
-    };
+    }, [id]);
+
+    useEffect(() => {
+        if (id) {
+            fetchProject();
+        }
+    }, [fetchProject, id]);
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
@@ -103,35 +103,39 @@ export default function UpdateProjectPage() {
     };
 
     return (
-        <div>
-            <div className="max-w-2xl mx-auto my-12 p-6 bg-white border border-gray-200 rounded-lg">
-                <h2 className="text-xl font-bold mb-4">Update Project</h2>
+        <div className="mx-auto max-w-3xl">
+            <div className="mb-6">
+                <span className="text-xs font-bold uppercase tracking-widest text-primary">Project editor</span>
+                <h1 className="karla-font mt-2 text-3xl font-extrabold text-foreground">Update Project</h1>
+                <p className="mt-2 text-sm leading-6 text-foreground/60">Edit public project details, photos, and status.</p>
+            </div>
+            <div className="rounded-geo border border-line bg-surface p-6 shadow-sm md:p-8">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <input className="border p-2 w-full" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
-                    <textarea className="border p-2 w-full" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required/>
-                    <input type="date" className="border p-2 w-full" value={date} onChange={(e) => setDate(e.target.value)} required/>
-                    <input className="border p-2 w-full" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} required/>
-                    <input className="border p-2 w-full" placeholder="Google Map Location" value={googleMapLocation} onChange={(e) => setGoogleMapLocation(e.target.value)}
+                    <input className="w-full rounded-geo border border-line bg-background px-4 py-3 outline-none focus:border-primary" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
+                    <textarea className="min-h-32 w-full rounded-geo border border-line bg-background px-4 py-3 outline-none focus:border-primary" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required/>
+                    <input type="date" className="w-full rounded-geo border border-line bg-background px-4 py-3 outline-none focus:border-primary" value={date} onChange={(e) => setDate(e.target.value)} required/>
+                    <input className="w-full rounded-geo border border-line bg-background px-4 py-3 outline-none focus:border-primary" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} required/>
+                    <input className="w-full rounded-geo border border-line bg-background px-4 py-3 outline-none focus:border-primary" placeholder="Google Map Location" value={googleMapLocation} onChange={(e) => setGoogleMapLocation(e.target.value)}
                            required/>
-                    <input className="border p-2 w-full" placeholder="Client Name" value={clientName} onChange={(e) => setClientName(e.target.value)} required/>
-                    <select className="border p-2 w-full" value={status} onChange={(e) => setStatus(e.target.value)}>
+                    <input className="w-full rounded-geo border border-line bg-background px-4 py-3 outline-none focus:border-primary" placeholder="Client Name" value={clientName} onChange={(e) => setClientName(e.target.value)} required/>
+                    <select className="w-full rounded-geo border border-line bg-background px-4 py-3 outline-none focus:border-primary" value={status} onChange={(e) => setStatus(e.target.value)}>
                         <option value="ongoing">Ongoing</option>
                         <option value="completed">Completed</option>
                     </select>
 
                     {/* File Upload */}
-                    <label className="block font-semibold">Upload Photos:</label>
-                    <input type="file" onChange={handleFileUpload} className="border p-2 w-full"/>
-                    {uploading && <p>Uploading...</p>}
+                    <label className="block text-sm font-bold text-foreground">Upload Photos</label>
+                    <input type="file" onChange={handleFileUpload} className="w-full rounded-geo border border-dashed border-line bg-surface-muted/50 px-4 py-3 text-sm"/>
+                    {uploading && <p className="text-sm font-semibold text-primary">Uploading...</p>}
 
                     {/* Photo Preview */}
                     <div className="grid grid-cols-3 gap-2 mt-2">
                         {photos && photos.map((photo, index) => (
                             <div key={index} className="relative">
-                                <img src={photo} alt="Uploaded" className="w-full h-24 object-cover rounded-md"/>
+                                <img src={photo} alt="Uploaded" className="h-24 w-full rounded-geo object-cover"/>
                                 <button
                                     type="button"
-                                    className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded"
+                                    className="absolute right-1 top-1 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white"
                                     onClick={() => removePhoto(index)}
                                 >
                                     ✕
@@ -140,8 +144,10 @@ export default function UpdateProjectPage() {
                         ))}
                     </div>
 
-                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Update Project</button>
-                    <button type={"button"} onClick={() => setIsDeleting(true)} className="bg-red-500 text-white px-4 py-2 ml-2 rounded">Delete Project</button>
+                    <div className="flex flex-wrap gap-3">
+                        <button type="submit" className="rounded-geo bg-primary px-5 py-3 text-sm font-bold text-white hover:bg-primary-strong">Update Project</button>
+                        <button type="button" onClick={() => setIsDeleting(true)} className="rounded-geo bg-red-600 px-5 py-3 text-sm font-bold text-white hover:bg-red-700">Delete Project</button>
+                    </div>
                 </form>
             </div>
             <DeleteConfirmationModal isOpen={isDeleting} onConfirm={deleteProject} onCancel={() => setIsDeleting(false)}/>

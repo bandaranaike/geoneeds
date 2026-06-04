@@ -2,8 +2,10 @@ import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import React from "react";
 import Link from "next/link";
+import {getLatestProjects} from "@/lib/projects";
+import PublicProjectsGrid from "@/app/components/PublicProjectsGrid";
 
-export default function Home() {
+export default async function Home() {
     // Expertise items data
     const expertise = [
         {
@@ -54,37 +56,7 @@ export default function Home() {
         }
     ];
 
-    // Recent surveys showcase data
-    const recentSurveys = [
-        {
-            title: "ANURADHAPURA NORTH",
-            region: "DRY ZONE, SL",
-            yieldVal: "15,000 LPH",
-            rating: 5,
-            image: "/survey_anuradhapura.png"
-        },
-        {
-            title: "KANDY HILL BASE",
-            region: "CENTRAL, SL",
-            yieldVal: "8,000 LPH",
-            rating: 5,
-            image: "/survey_kandy.png"
-        },
-        {
-            title: "HAMBANTOTA COAST",
-            region: "SOUTHERN, SL",
-            yieldVal: "12,000 LPH",
-            rating: 5,
-            image: "/survey_hambantota.png"
-        },
-        {
-            title: "JAFFNA LIMESTONE",
-            region: "NORTHERN, SL",
-            yieldVal: "10,500 LPH",
-            rating: 5,
-            image: "/survey_jaffna.png"
-        }
-    ];
+    const latestProjects = await getLatestProjects(3);
 
     // Ordering process steps
     const processSteps = [
@@ -278,39 +250,7 @@ export default function Home() {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {recentSurveys.map((item, idx) => (
-                            <div key={idx} className="group overflow-hidden rounded-geo border border-line bg-surface shadow-sm hover:shadow-lg transition-all duration-300">
-                                <div className="aspect-[4/3] w-full overflow-hidden bg-slate-100">
-                                    <img 
-                                        src={item.image} 
-                                        alt={item.title} 
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                                    />
-                                </div>
-                                <div className="p-5 space-y-3">
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-xs font-bold tracking-wider text-foreground/60">{item.region}</span>
-                                        {/* Stars (inline SVG to prevent compilation issues) */}
-                                        <div className="flex gap-0.5">
-                                            {[...Array(item.rating)].map((_, i) => (
-                                                <svg key={i} className="size-3.5 text-yellow-500 fill-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path d="M10.868 2.784a.75.75 0 0 0-1.736 0l-2.03 4.116-4.542.66a.75.75 0 0 0-.416 1.28l3.287 3.203-.775 4.524a.75.75 0 0 0 1.088.79l4.06-2.135 4.06 2.135a.75.75 0 0 0 1.088-.79l-.775-4.524 3.287-3.203a.75.75 0 0 0-.416-1.28l-4.542-.66-2.03-4.116Z" />
-                                                </svg>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <h3 className="font-extrabold text-lg text-foreground karla-font tracking-tight leading-tight">
-                                        {item.title}
-                                    </h3>
-                                    <div className="pt-2 border-t border-line flex justify-between items-center text-xs">
-                                        <span className="font-bold text-foreground/50">YIELD ESTIMATE</span>
-                                        <span className="font-extrabold text-primary text-sm">{item.yieldVal}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    <PublicProjectsGrid projects={latestProjects}/>
 
                     <div className="text-center mt-12">
                         <Link href="/projects" className="inline-flex items-center gap-2 rounded-full border-2 border-slate-900 dark:border-slate-800 text-foreground font-bold px-8 py-3.5 hover:bg-slate-950 hover:text-white transition duration-300 text-sm">

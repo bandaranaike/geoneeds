@@ -31,6 +31,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 - `app/contact-us/page.tsx`: Contact page using `app/components/ContactForm.tsx`.
 - `app/projects/page.tsx`: Project listing page.
 - `app/projects/[slug]/page.tsx`: Single project page. Despite the route name, `lib/projects.ts` currently treats `slug` as a MongoDB ObjectId.
+- `app/page.tsx`: Home page now fetches the latest four projects for the "MOST SUCCESSFUL SURVEYS!" section.
 - Legal pages: `app/privacy-policy/page.tsx`, `app/cookie-policy/page.tsx`, `app/terms-and-conditons/page.tsx` (note current spelling).
 
 ### Admin Routes
@@ -40,6 +41,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 - `app/admin/projects/page.tsx`: Project management list.
 - `app/admin/projects/new/page.tsx`: Create project form.
 - `app/admin/projects/[id]/page.tsx`: Edit project form.
+- Auth and admin pages use restrained theme-matched styling; admin CRUD behavior is unchanged.
 - `middleware.ts`: Protects `/admin/:path*`; redirects unauthenticated users to `/auth/signin` and non-admin users to `/`.
 
 ### API Routes
@@ -72,6 +74,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 - `app/globals.css` defines color variables for background, foreground, surface, primary, accent, earth, and border.
 - Homepage layout features a full-bleed hero banner utilizing a high-contrast dark overlay over a forest background image.
 - Public project pages now use theme-matched dark image hero sections, richer casework cards, project fact panels, method/process content, and the shared footer.
+- Public project cards are centralized in `app/components/PublicProjectsGrid.tsx`; reuse this component for home/project listing card layouts.
 - About and legal pages now use theme-matched sections; the terms, cookie, and privacy pages share a focused legal article layout.
 - Visual assets stored under `/public` now include: `/hero_forest.png`, `/groundwater_surveys.png`, `/soil_engineering.png`, `/water_quality.png`, `/borehole_logging.png`, `/resistivity_imaging.png`, `/pump_testing.png`, `/environmental_audit.png`, and `/cta_lake.png`, alongside individual regional survey thumbnails.
 - The `Header` component supports a `transparent` prop allowing navigation menus to float cleanly on top of image-heavy hero sections.
