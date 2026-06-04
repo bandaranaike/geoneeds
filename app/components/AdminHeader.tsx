@@ -1,14 +1,23 @@
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import {signOut} from "next-auth/react";
+import {usePathname} from "next/navigation";
 
 const navigation = [
-    {name: 'Dashboard', href: '/admin', current: true},
-    {name: 'Admin projects', href: '/admin/projects', current: false},
-    {name: 'Admin new project', href: '/admin/projects/new', current: false},
+    {name: 'Dashboard', href: '/admin'},
+    {name: 'Admin projects', href: '/admin/projects'},
+    {name: 'Admin new project', href: '/admin/projects/new'},
 ]
 
 export default function AdminHeader() {
+    const pathname = usePathname() || "";
+    const isActive = (href: string) => {
+        if (href === "/admin") return pathname === "/admin";
+        if (href === "/admin/projects/new") return pathname === href;
+        if (href === "/admin/projects") return pathname === href || (pathname.startsWith("/admin/projects/") && pathname !== "/admin/projects/new");
+        return pathname === href;
+    };
+
     return (
         <Disclosure as="nav" className="sticky top-0 z-50 border-b border-line bg-surface/90 backdrop-blur-xl">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -35,16 +44,24 @@ export default function AdminHeader() {
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex gap-2">
                                 {navigation.map((item) => (
+                                    isActive(item.href) ? (
                                     <a
                                         key={item.name}
                                         href={item.href}
-                                        aria-current={item.current ? 'page' : undefined}
-                                        className={item.current ? 'rounded-geo bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm' :
-                                            'rounded-geo px-4 py-2 text-sm font-semibold text-foreground/70 hover:bg-surface-muted hover:text-primary'
-                                        }
+                                        aria-current="page"
+                                        className="rounded-geo bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm"
                                     >
                                         {item.name}
                                     </a>
+                                    ) : (
+                                    <a
+                                        key={item.name}
+                                        href={item.href}
+                                        className="rounded-geo px-4 py-2 text-sm font-semibold text-foreground/70 hover:bg-surface-muted hover:text-primary"
+                                    >
+                                        {item.name}
+                                    </a>
+                                    )
                                 ))}
                             </div>
                         </div>
@@ -85,17 +102,26 @@ export default function AdminHeader() {
             <DisclosurePanel className="border-t border-line bg-surface sm:hidden">
                 <div className="space-y-1 px-2 pt-2 pb-3">
                     {navigation.map((item) => (
+                        isActive(item.href) ? (
                         <DisclosureButton
                             key={item.name}
                             as="a"
                             href={item.href}
-                            aria-current={item.current ? 'page' : undefined}
-                            className={
-                                item.current ? 'block rounded-geo bg-primary px-3 py-2 text-base font-semibold text-white' : 'block rounded-geo px-3 py-2 text-base font-semibold text-foreground/70 hover:bg-surface-muted hover:text-primary'
-                            }
+                            aria-current="page"
+                            className="block rounded-geo bg-primary px-3 py-2 text-base font-semibold text-white"
                         >
                             {item.name}
                         </DisclosureButton>
+                        ) : (
+                        <DisclosureButton
+                            key={item.name}
+                            as="a"
+                            href={item.href}
+                            className="block rounded-geo px-3 py-2 text-base font-semibold text-foreground/70 hover:bg-surface-muted hover:text-primary"
+                        >
+                            {item.name}
+                        </DisclosureButton>
+                        )
                     ))}
                 </div>
             </DisclosurePanel>

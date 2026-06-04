@@ -18,6 +18,7 @@ No tasks.
 
 | ID | Task | File |
 | --- | --- | --- |
+| 008 | Fix Admin Active Menu Highlight | `completed/008_fix_admin_active_menu_highlight.md` |
 | 007 | Theme Auth and Admin Pages | `completed/007_theme_auth_and_admin_pages.md` |
 | 006 | Show Three Home Projects | `completed/006_show_three_home_projects.md` |
 | 005 | Make Home Survey Projects Dynamic | `completed/005_dynamic_home_survey_projects.md` |
