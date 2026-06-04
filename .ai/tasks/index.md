@@ -18,6 +18,7 @@ No tasks.
 
 | ID | Task | File |
 | --- | --- | --- |
+| 004 | Modernize About and Policy Pages | `completed/004_modernize_about_and_policy_pages.md` |
 | 003 | Modernize Public Project Pages | `completed/003_modernize_public_project_pages.md` |
 | 002 | Redesign Home Page and Theme Structure | `completed/002_change_theme_structure.md` |
 | 001 | Install New Theme | `completed/001_install_new_theme.md` |

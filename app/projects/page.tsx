@@ -56,7 +56,7 @@ export default async function Projects() {
 
                         <div className="grid content-end gap-4 sm:grid-cols-3 lg:grid-cols-1">
                             {metrics.map((item) => (
-                                <div key={item.label} className="border border-white/15 bg-white/10 p-5 backdrop-blur">
+                                <div key={item.label} className="border border-white/15 bg-white/10 p-5 backdrop-blur rounded-geo">
                                     <p className="text-xs font-bold uppercase tracking-widest text-slate-400">{item.label}</p>
                                     <p className="mt-2 text-2xl font-extrabold text-white karla-font">{item.value}</p>
                                 </div>
