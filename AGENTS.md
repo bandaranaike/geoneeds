@@ -78,6 +78,7 @@ To ensure the project stays well-documented:
    - We are currently using Tailwind CSS v3 with custom variables.
    - Utilize existing UI components such as Header, Footer, Encompasses, and WaterWave.
 3. **Save Agent Quotas:** Always use the smallest practical context and command set.
+   - Treat minimum Codex quota usage as a standing priority for every task and every turn.
    - Read `.ai/project_overview.md`, the relevant task file, and only the source files needed for the current change.
    - Prefer `rg`, `find`, `sed -n`, and narrow file reads over broad scans or opening large generated folders.
    - Do not inspect `.next`, `node_modules`, build output, or large media unless the task explicitly requires it.
