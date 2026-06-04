@@ -42,6 +42,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 - `app/admin/projects/new/page.tsx`: Create project form.
 - `app/admin/projects/[id]/page.tsx`: Edit project form.
 - Auth and admin pages use restrained theme-matched styling; admin CRUD behavior is unchanged.
+- Admin project create/edit pages use `app/components/AdminToast.tsx` for success/error feedback; new project form resets after successful create.
 - `middleware.ts`: Protects `/admin/:path*`; redirects unauthenticated users to `/auth/signin` and non-admin users to `/`.
 
 ### API Routes

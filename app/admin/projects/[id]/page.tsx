@@ -3,6 +3,7 @@
 import {useState, useEffect, useCallback} from "react";
 import {useParams} from 'next/navigation';
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import AdminToast, {AdminToastState} from "@/app/components/AdminToast";
 
 export default function UpdateProjectPage() {
 
@@ -19,6 +20,7 @@ export default function UpdateProjectPage() {
     const [status, setStatus] = useState("ongoing");
     const [uploading, setUploading] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [toast, setToast] = useState<AdminToastState | null>(null);
 
     const fetchProject = useCallback(async () => {
         const res = await fetch(`/api/admin/projects/${id}`);
@@ -84,9 +86,9 @@ export default function UpdateProjectPage() {
         });
 
         if (res.ok) {
-            alert("Project Updated!");
+            setToast({type: "success", message: "Project updated successfully."});
         } else {
-            alert("Failed to update project.");
+            setToast({type: "error", message: "Failed to update project. Please check the details and try again."});
         }
     };
 
@@ -98,12 +100,13 @@ export default function UpdateProjectPage() {
         if (res.ok) {
             window.location.href = "/admin/projects";
         } else {
-            alert("Failed to delete project.");
+            setToast({type: "error", message: "Failed to delete project. Please try again."});
         }
     };
 
     return (
         <div className="mx-auto max-w-3xl">
+            <AdminToast toast={toast} onClose={() => setToast(null)}/>
             <div className="mb-6">
                 <span className="text-xs font-bold uppercase tracking-widest text-primary">Project editor</span>
                 <h1 className="karla-font mt-2 text-3xl font-extrabold text-foreground">Update Project</h1>

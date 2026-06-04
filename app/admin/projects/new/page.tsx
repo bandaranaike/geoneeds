@@ -1,6 +1,7 @@
 "use client";
 
 import {useState} from "react";
+import AdminToast, {AdminToastState} from "@/app/components/AdminToast";
 
 export default function NewProjectPage() {
     const [title, setTitle] = useState("");
@@ -12,6 +13,18 @@ export default function NewProjectPage() {
     const [clientName, setClientName] = useState("");
     const [status, setStatus] = useState("ongoing");
     const [uploading, setUploading] = useState(false);
+    const [toast, setToast] = useState<AdminToastState | null>(null);
+
+    const resetForm = () => {
+        setTitle("");
+        setDescription("");
+        setDate("");
+        setPhotos([]);
+        setLocation("");
+        setGoogleMapLocation("");
+        setClientName("");
+        setStatus("ongoing");
+    };
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
@@ -58,14 +71,16 @@ export default function NewProjectPage() {
         });
 
         if (res.ok) {
-            alert("Project Created!");
+            resetForm();
+            setToast({type: "success", message: "Project created successfully. The form is ready for a new project."});
         } else {
-            alert("Failed to create project.");
+            setToast({type: "error", message: "Failed to create project. Please check the details and try again."});
         }
     };
 
     return (
         <div className="mx-auto max-w-3xl">
+            <AdminToast toast={toast} onClose={() => setToast(null)}/>
             <div className="mb-6">
                 <span className="text-xs font-bold uppercase tracking-widest text-primary">Project editor</span>
                 <h1 className="karla-font mt-2 text-3xl font-extrabold text-foreground">Create New Project</h1>
