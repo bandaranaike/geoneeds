@@ -42,7 +42,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 - `app/admin/projects/new/page.tsx`: Create project form.
 - `app/admin/projects/[id]/page.tsx`: Edit project form.
 - Auth and admin pages use restrained theme-matched styling; admin CRUD behavior is unchanged.
-- Admin project create/edit pages use `app/components/AdminToast.tsx` for success/error feedback; new project form resets after successful create.
+- Admin project create/edit pages use `app/components/AdminToast.tsx` for success/error feedback; new project form resets after successful create. Project photo inputs support multiple selected files and append all uploaded Cloudinary URLs to the `photos` array.
 - `middleware.ts`: Protects `/admin/:path*`; redirects unauthenticated users to `/auth/signin` and non-admin users to `/`.
 
 ### API Routes
@@ -52,7 +52,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 - `app/api/admin/contact-messages/route.ts`: Admin contact-message endpoint.
 - `app/api/admin/projects/route.ts`: Admin project collection endpoint.
 - `app/api/admin/projects/[id]/route.ts`: Admin project item endpoint.
-- `app/api/admin/upload/route.ts`: Upload endpoint, expected to work with Cloudinary.
+- `app/api/admin/upload/route.ts`: Cloudinary upload endpoint. Accepts one or more repeated `file` form-data fields, uploads in small concurrent batches via Cloudinary upload streams, and returns `secure_urls` plus legacy `secure_url`.
 - `app/api/atlas.ts`: Legacy or utility API file; verify usage before changing.
 
 ### Shared Code

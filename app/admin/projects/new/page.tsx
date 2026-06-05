@@ -3,6 +3,20 @@
 import {useState} from "react";
 import AdminToast, {AdminToastState} from "@/app/components/AdminToast";
 
+type UploadResponse = {
+    secure_url?: string;
+    secure_urls?: string[];
+    error?: string;
+};
+
+function getUploadedUrls(data: UploadResponse) {
+    if (data.secure_urls?.length) {
+        return data.secure_urls;
+    }
+
+    return data.secure_url ? [data.secure_url] : [];
+}
+
 export default function NewProjectPage() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -27,22 +41,40 @@ export default function NewProjectPage() {
     };
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files) return;
+        const selectedFiles = Array.from(e.target.files ?? []);
+        if (selectedFiles.length === 0) return;
 
-        const file = e.target.files[0];
         setUploading(true);
 
         const formData = new FormData();
-        formData.append("file", file);
-
-        const res = await fetch("/api/admin/upload", {
-            method: "POST",
-            body: formData,
+        selectedFiles.forEach((file) => {
+            formData.append("file", file);
         });
 
-        const data = await res.json();
-        setUploading(false);
-        setPhotos([...photos, data.secure_url]); // Store uploaded photo URL
+        try {
+            const res = await fetch("/api/admin/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await res.json() as UploadResponse;
+            if (!res.ok) {
+                throw new Error(data.error ?? "Upload failed.");
+            }
+
+            const uploadedUrls = getUploadedUrls(data);
+            if (uploadedUrls.length === 0) {
+                throw new Error("Upload response did not include any file URLs.");
+            }
+
+            setPhotos((currentPhotos) => [...currentPhotos, ...uploadedUrls]);
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Upload failed.";
+            setToast({type: "error", message});
+        } finally {
+            setUploading(false);
+            e.target.value = "";
+        }
     };
 
     const removePhoto = (index: number) => {
@@ -103,7 +135,7 @@ export default function NewProjectPage() {
 
                     {/* File Upload */}
                     <label className="block text-sm font-bold text-foreground">Upload Photos</label>
-                    <input type="file" onChange={handleFileUpload} className="w-full rounded-geo border border-dashed border-line bg-surface-muted/50 px-4 py-3 text-sm"/>
+                    <input type="file" multiple onChange={handleFileUpload} className="w-full rounded-geo border border-dashed border-line bg-surface-muted/50 px-4 py-3 text-sm"/>
                     {uploading && <p className="text-sm font-semibold text-primary">Uploading...</p>}
 
                     {/* Photo Preview */}

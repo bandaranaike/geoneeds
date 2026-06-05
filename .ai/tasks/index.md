@@ -1,6 +1,6 @@
 # Task Index
 
-Last updated: 2026-06-04
+Last updated: 2026-06-05
 
 ## Pending
 
@@ -18,6 +18,7 @@ No tasks.
 
 | ID | Task | File |
 | --- | --- | --- |
+| 010 | Multi-File Project Uploads | `completed/010_multi_file_project_uploads.md` |
 | 009 | Add Admin Project Toasts and Reset Create Form | `completed/009_admin_project_toasts_reset.md` |
 | 008 | Fix Admin Active Menu Highlight | `completed/008_fix_admin_active_menu_highlight.md` |
 | 007 | Theme Auth and Admin Pages | `completed/007_theme_auth_and_admin_pages.md` |
