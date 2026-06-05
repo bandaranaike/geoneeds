@@ -18,6 +18,7 @@ No tasks.
 
 | ID | Task | File |
 | --- | --- | --- |
+| 013 | Modernize Contact Page Validation | `completed/013_modernize_contact_page_validation.md` |
 | 012 | Fix Production Project Visibility | `completed/012_project_visibility_cache_fix.md` |
 | 011 | Diagnose GitHub Actions SSH Timeout | `completed/011_github_actions_ssh_timeout.md` |
 | 010 | Multi-File Project Uploads | `completed/010_multi_file_project_uploads.md` |

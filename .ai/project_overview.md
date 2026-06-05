@@ -32,7 +32,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 
 - `app/page.tsx`: Home page, including GeoNeeds marketing content and WaterWave usage.
 - `app/about-us/page.tsx`: About page with profile/service content and `Encompasses`.
-- `app/contact-us/page.tsx`: Contact page using `app/components/ContactForm.tsx`.
+- `app/contact-us/page.tsx`: Modern contact page using `app/components/ContactForm.tsx`, with custom inline validation instead of native browser validation.
 - `app/projects/page.tsx`: Project listing page.
 - `app/projects/[slug]/page.tsx`: Single project page. Despite the route name, `lib/projects.ts` currently treats `slug` as a MongoDB ObjectId.
 - `app/page.tsx`: Home page now fetches the latest four projects for the "MOST SUCCESSFUL SURVEYS!" section.
@@ -53,6 +53,7 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 
 - `app/api/auth/[...nextauth]/route.ts`: NextAuth route using `lib/auth.ts`.
 - `app/api/contact-us/route.ts`: Public contact form submission endpoint.
+- Contact submissions require name, message, and at least one contact method: email or phone.
 - `app/api/admin/contact-messages/route.ts`: Admin contact-message endpoint.
 - `app/api/admin/projects/route.ts`: Admin project collection endpoint.
 - `app/api/admin/projects/[id]/route.ts`: Admin project item endpoint.

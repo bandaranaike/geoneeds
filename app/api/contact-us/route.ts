@@ -4,9 +4,13 @@ import clientPromise from "@/lib/mongodb";
 export async function POST(request: Request) {
     try {
         const {name, phone, email, message} = await request.json();
+        const trimmedName = typeof name === 'string' ? name.trim() : '';
+        const trimmedPhone = typeof phone === 'string' ? phone.trim() : '';
+        const trimmedEmail = typeof email === 'string' ? email.trim() : '';
+        const trimmedMessage = typeof message === 'string' ? message.trim() : '';
 
-        if (!name || !email || !message) {
-            return NextResponse.json({message: 'Missing required fields'}, {status: 400});
+        if (!trimmedName || !trimmedMessage || (!trimmedEmail && !trimmedPhone)) {
+            return NextResponse.json({message: 'Name, message, and at least one contact method are required'}, {status: 400});
         }
 
         const client = await clientPromise;
@@ -14,10 +18,10 @@ export async function POST(request: Request) {
         const collection = db.collection('contactMessages'); // Choose a collection name
 
         await collection.insertOne({
-            name,
-            phone,
-            email,
-            message,
+            name: trimmedName,
+            phone: trimmedPhone,
+            email: trimmedEmail,
+            message: trimmedMessage,
             createdAt: new Date(),
         });
 
