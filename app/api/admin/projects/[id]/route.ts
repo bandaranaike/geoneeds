@@ -3,6 +3,7 @@ import {NextRequest, NextResponse} from 'next/server';
 import {getProject} from "@/lib/projects";
 import clientPromise from "@/lib/mongodb";
 import {ObjectId} from "mongodb";
+import {revalidatePath} from "next/cache";
 
 export async function GET(request: NextRequest, {params}: { params: Promise<{ id: string }> }) {
     const {id} = await params;
@@ -28,6 +29,11 @@ export async function PUT(request: Request, {params}: { params: Promise<{ id: st
         const client = await clientPromise;
         const db = client.db("geoneeds");
         await db.collection("projects").updateOne({_id: new ObjectId(id)}, {$set: project});
+        revalidatePath("/");
+        revalidatePath("/projects");
+        revalidatePath(`/projects/${id}`);
+        revalidatePath("/admin/projects");
+        revalidatePath(`/admin/projects/${id}`);
         return NextResponse.json({message: `Project ${id} updated successfully`}, {status: 200});
     } catch (error) {
         console.error(`Error updating project ${id}:`, error);
@@ -41,6 +47,11 @@ export async function DELETE(request: Request, {params}: { params: Promise<{ id:
         const client = await clientPromise;
         const db = client.db("geoneeds");
         await db.collection("projects").deleteOne({_id: new ObjectId(id)});
+        revalidatePath("/");
+        revalidatePath("/projects");
+        revalidatePath(`/projects/${id}`);
+        revalidatePath("/admin/projects");
+        revalidatePath(`/admin/projects/${id}`);
         return NextResponse.json({message: `Project ${id} deleted successfully`}, {status: 200});
     } catch (error) {
         console.error(`Error deleting project ${id}:`, error);

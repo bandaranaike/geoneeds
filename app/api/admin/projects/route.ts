@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
 import clientPromise from "@/lib/mongodb";
+import {revalidatePath} from "next/cache";
 
 export async function POST(req: Request) {
     const project = await req.json();
@@ -7,6 +8,9 @@ export async function POST(req: Request) {
     const db = client.db("geoneeds");
 
     await db.collection("projects").insertOne(project);
+    revalidatePath("/");
+    revalidatePath("/projects");
+    revalidatePath("/admin/projects");
 
     return NextResponse.json({message: "Project created successfully"}, {status: 201});
 }

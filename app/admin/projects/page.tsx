@@ -2,6 +2,8 @@ import Link from "next/link";
 import {getProjects} from "@/lib/projects";
 import {PlusCircleIcon} from "@heroicons/react/24/outline";
 
+export const dynamic = "force-dynamic";
+
 export default async function Projects() {
     const projects = await getProjects();
 

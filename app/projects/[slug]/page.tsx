@@ -4,6 +4,8 @@ import Footer from "@/app/components/Footer";
 import {getProject} from "@/lib/projects";
 import ImageGallery from "@/app/components/ImageGallery";
 
+export const dynamic = "force-dynamic";
+
 interface ProjectPageProps {
     params: Promise<{ slug: string }>;
 }

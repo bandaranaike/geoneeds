@@ -3,6 +3,8 @@ import {getProjects} from "@/lib/projects";
 import Footer from "@/app/components/Footer";
 import PublicProjectsGrid from "@/app/components/PublicProjectsGrid";
 
+export const dynamic = "force-dynamic";
+
 const capabilities = [
     "Hydrogeological surveys",
     "Resistivity imaging",

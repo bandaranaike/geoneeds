@@ -5,6 +5,8 @@ import Link from "next/link";
 import {getLatestProjects} from "@/lib/projects";
 import PublicProjectsGrid from "@/app/components/PublicProjectsGrid";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
     // Expertise items data
     const expertise = [
