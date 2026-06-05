@@ -18,6 +18,7 @@ No tasks.
 
 | ID | Task | File |
 | --- | --- | --- |
+| 011 | Diagnose GitHub Actions SSH Timeout | `completed/011_github_actions_ssh_timeout.md` |
 | 010 | Multi-File Project Uploads | `completed/010_multi_file_project_uploads.md` |
 | 009 | Add Admin Project Toasts and Reset Create Form | `completed/009_admin_project_toasts_reset.md` |
 | 008 | Fix Admin Active Menu Highlight | `completed/008_fix_admin_active_menu_highlight.md` |

@@ -24,6 +24,10 @@ This document is the quick-start context for AI agents working on the GeoNeeds s
 
 ## Current App Map
 
+### Deployment
+
+- `.github/workflows/deploy.yml`: Pushes to `main` deploy through `appleboy/ssh-action` to the VPS, using `VPS_HOST`, optional `VPS_PORT` defaulting to `22`, `VPS_USER`, and `SSH_PRIVATE_KEY` secrets. The remote script pulls `origin/main`, installs with `pnpm install --frozen-lockfile`, builds, restarts PM2, and reloads Nginx.
+
 ### Public Routes
 
 - `app/page.tsx`: Home page, including GeoNeeds marketing content and WaterWave usage.
