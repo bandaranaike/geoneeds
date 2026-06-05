@@ -85,6 +85,7 @@ const Footer: React.FC = () => {
                 {/* Bottom Row */}
                 <div className="mt-16 pt-8 border-t border-slate-900 text-xs flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500">
                     <p>2026 ALL RIGHT RESERVED</p>
+                    <a href="https://erbitron.com/" target="_blank">Built by Erbitron</a>
                     <div className="flex gap-6">
                         <Link href="/privacy-policy" className="hover:text-slate-300 transition">PRIVACY POLICY</Link>
                         <Link href="/terms-and-conditons" className="hover:text-slate-300 transition">TERM OF SERVICE</Link>
